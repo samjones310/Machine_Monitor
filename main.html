@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V19</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+				<form class="login100-form validate-form" method="POST" action="createnew.php">
+					<span class="login100-form-title p-b-33">
+						Machine Info
+					</span>
+					<div class="jumbotron">
+<div class="container text-center" >
+<br>
+				<h3 class="cha" id="cha"></h3>
+                <h3 class="sta" id="sta"></h3>
+				  <h3 class="fil" id="fil"></h3>
+				 <h3 class="bil" id="bil"></h3><br>
+				    <a href="help.html" class="btn  btn-primary" type="submit">Need Help</a>
+</div>
+</div>
+					<div class="text-center p-t-45 p-b-4">
+						<span class="txt1">
+	
+						</span>
+
+						<a href="#" class="txt2 hov1">
+						</a>
+					</div>
+
+					<div class="text-center">
+						<span class="txt1">
+						</span>
+
+						<a href="index.html" class="txt2 hov1">
+							Log Out
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+			document.getElementById("btn1").onclick = function () {
+        location.href = "NEWRES.HTML";
+			};
+		
+				</script>
+<script>
+var myObj, myJSON, text, obj;
+
+//Storing data:
+//myObj = {"channel":{"id":417010,"name":"wa","description":"water levvel","latitude":"0.0","longitude":"0.0","field1":"SEBNSOR","field2":"flow rate","created_at":"2018-02-01T17:53:34Z","updated_at":"2018-04-14T18:59:37Z","last_entry_id":606},"feeds":[{"created_at":"2018-04-14T18:59:20Z","entry_id":605,"field1":"100","field2":"100"},{"created_at":"2018-04-14T18:59:37Z","entry_id":606,"field1":"100","field2":"100"}]}
+//myObj = JSONRequest.get("https://api.thingspeak.com/channels/417010/feeds.json?results=2");
+//alert(myObj);
+
+    $.getJSON("https://api.thingspeak.com/channels/417010/fields/1.json?results=2", function(data) {
+        
+        var myObj = data;
+        console.log(myObj);
+		
+myJSON = JSON.stringify(myObj);
+localStorage.setItem("testJSON", myJSON);
+
+//Retrieving data:
+text = localStorage.getItem("testJSON");
+obj = JSON.parse(text);
+console.log(obj);
+document.getElementById("cha").innerHTML = "Channel id     :"+obj.channel.id;
+document.getElementById("sta").innerHTML = "Tank  Level    :"+obj.feeds[0].field1;
+document.getElementById("fil").innerHTML = "Tank Quantity  :"+obj.feeds[0].entry_id;
+document.getElementById("bil").innerHTML = "Bill Amount    :"+obj.channel.latitude;
+document.getElementById("las").innerHTML = "Last Update    :"+obj.feeds[0].created_at;
+
+    });
+
+</script>
+	
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+</body>
+</html>
